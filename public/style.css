@@ -1,0 +1,65 @@
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.red-text {
+    color: red;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+pre {
+    max-height: 80vh;
+    width: 100%;
+    overflow: auto;
+    white-space: pre-line;
+    background-color: #121212;
+}
+
+.white-text {
+    color: white;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
