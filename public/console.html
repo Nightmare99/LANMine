@@ -24,7 +24,7 @@
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Command" aria-label="Command" aria-describedby="basic-addon2" id="cmd">
         <div class="input-group-append">
-          <button class="btn btn-outline-primary" type="button" onclick="sendCommand(document.getElementById('cmd').value)">Run</button>
+          <button class="btn btn-outline-primary" id="run" type="button" onclick="sendCommand(document.getElementById('cmd').value)">Run</button>
         </div>
       </div>
     </div>
@@ -37,6 +37,14 @@
     </div>
     <script> require("../renderer.js"); </script>
     <script>
+      var input = document.getElementById("cmd");
+      input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.getElementById("run").click();
+        }
+      });
+
       function sendCommand(cmd) {
           require('electron').ipcRenderer.send('command', cmd);
       }

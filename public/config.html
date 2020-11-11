@@ -52,10 +52,16 @@
               <small id="discordHelp" class="form-text text-muted">Leave this field empty to opt out of discord integration.</small>
             </div>
         </div>
-        <button class="btn btn-primary" onclick="checkConfig();">Start server</button>
+        <button class="btn btn-success" onclick="startServer();">Start server</button>
+        <button class="btn btn-primary" onclick="saveConfig();">Save custom configuration</button>
     </div>
     <script> require("../renderer.js"); </script>
     <script>
+        function saveConfig() {
+          var config = checkConfig();
+          require('electron').ipcRenderer.send('save-config', config);
+        }
+
         function pickFile() {
           require('electron').ipcRenderer.send('pick-file');
         }
@@ -108,8 +114,12 @@
                     discordChannel: channel
                 };
                 console.log(config);
-                require('electron').ipcRenderer.send('start-server', config);
+                return config;
             }
+        }
+        function startServer() {
+          var config = checkConfig();
+          require('electron').ipcRenderer.send('start-server', config);
         }
     </script>
   </body>

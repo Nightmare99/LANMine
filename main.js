@@ -4,6 +4,7 @@ const ngrok = require('ngrok');
 const Discord = require('discord.js');
 const config = require('./config.json');
 const discordKey = require('./discordSecret.json');
+const path = require('path');
 const fs = require('fs');
 
 var client = undefined;
@@ -25,11 +26,11 @@ function createWindow () {
     win.loadFile('./public/console.html');
     start(win, config);
   }
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
   ipcMain.on("pick-file", () => {
     dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
       if (!response.canceled) {
-          // handle fully qualified file name
+        // handle fully qualified file name
         var jar = response.filePaths[0]; 
         console.log(jar);
         win.webContents.send('jar-path', jar);
@@ -50,6 +51,13 @@ function createWindow () {
     win.webContents.once('dom-ready', () => {
       win.webContents.send('config', config);
     });
+  });
+
+  ipcMain.on("save-config", (event, config) => {
+    const userDataPath = app.getPath('userData');
+    var filePath = path.join(userDataPath, 'custom.json');
+    console.log(filePath);
+    fs.writeFileSync(filePath, JSON.stringify(config));
   });
 }
 
