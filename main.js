@@ -26,7 +26,7 @@ function createWindow () {
     win.loadFile('./public/console.html');
     start(win, config);
   }
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   ipcMain.on("pick-file", () => {
     dialog.showOpenDialog({properties: ['openFile'] }).then(function (response) {
       if (!response.canceled) {
@@ -100,12 +100,25 @@ function start(win, config) {
           proto: 'tcp',
           addr: config.port, // port or network address, defaults to 80
           authtoken: config.ngrokToken, // your authtoken from ngrok.com
-          region: 'us', // one of ngrok regions (us, eu, au, ap, sa, jp, in), defaults to us
-
+          region: 'in', // one of ngrok regions (us, eu, au, ap, sa, jp, in), defaults to us
           onStatusChange: status => { win.webContents.send("status", status); }, 
           onLogEvent: data => { win.webContents.send("data", data); }, 
       });
+      console.log(url);
       win.webContents.send("url", url);
+
+      // for RCON
+      const urlRcon = await ngrok.connect({
+        proto: 'tcp',
+        addr: 25575, // port or network address, defaults to 80
+        authtoken: config.ngrokToken, // your authtoken from ngrok.com
+        region: 'in', // one of ngrok regions (us, eu, au, ap, sa, jp, in), defaults to us
+        onStatusChange: status => { win.webContents.send("status", status); }, 
+        onLogEvent: data => { win.webContents.send("data", data); }, 
+      });
+      console.log(urlRcon);
+      win.webContents.send("urlRcon", urlRcon);
+
       if (config.discordChannel.length > 0) {
         client = new Discord.Client();
         client.login(discordKey.secret);

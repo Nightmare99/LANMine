@@ -23,11 +23,11 @@ pre {
     width: 100%;
     overflow: auto;
     white-space: pre-line;
-    background-color: #121212;
+    background-color: black;
 }
 
-.white-text {
-    color: white;
+.lime-text {
+    color: lime;
 }
 
 /* Style the buttons that are used to open the tab content */

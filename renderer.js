@@ -6,7 +6,7 @@ ipcRenderer.on("jar-path", (event, jar) => {
 
 ipcRenderer.on("stat", (event, stat) => {          
     var node = document.createElement("SPAN");
-    node.className = "white-text";   
+    node.className = "lime-text";   
     var textnode = document.createTextNode(stat); 
     node.appendChild(textnode);        
     pre = document.getElementById("serverStats")
@@ -16,7 +16,7 @@ ipcRenderer.on("stat", (event, stat) => {
 
 ipcRenderer.on("status", (event, status) => {
     var node = document.createElement("SPAN");
-    node.className = "white-text";               
+    node.className = "lime-text";               
     var textnode = document.createTextNode(status);  
     node.appendChild(textnode);        
     pre = document.getElementById("ngrok")
@@ -26,7 +26,7 @@ ipcRenderer.on("status", (event, status) => {
 
 ipcRenderer.on("data", (event, data) => {
     var node = document.createElement("SPAN");
-    node.className = "white-text";              
+    node.className = "lime-text";              
     var textnode = document.createTextNode(data);  
     node.appendChild(textnode);       
     pre = document.getElementById("ngrok")
@@ -36,6 +36,10 @@ ipcRenderer.on("data", (event, data) => {
 
 ipcRenderer.on("url", (event, url) => {            
     document.getElementById("url").innerText = url;
+});
+
+ipcRenderer.on("urlRcon", (event, url) => {            
+    document.getElementById("urlRcon").innerText = url;
 });
 
 ipcRenderer.on("server-stopped", (event) => {
