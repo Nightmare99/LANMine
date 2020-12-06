@@ -125,7 +125,7 @@ function start(win, config) {
         client.once('ready', () => {
           console.log('Discord bot ready.');
           var channel = client.channels.cache.get(config.discordChannel);
-          channel.send('Server started at: ' + '```' + url + '```');
+          channel.send('Server started at: ' + '```' + url.slice(6) + '```');
         });
       }
   })();
