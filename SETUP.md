@@ -22,4 +22,4 @@ Before starting the app, do the following:
 ```
 
 ## Building your own executables
-```npm run-script build```
+```npm make```
