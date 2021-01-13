@@ -1,8 +1,0 @@
-{
-    "jar": "Name of your minecraft server jar",
-    "cwd": "Current working directory, i.e., where your minecraft server jar resides",
-    "flags": "Flags to run your minecraft jar file with",
-    "ngrokToken": "Your ngrok token",
-    "port": "Port of your minecraft server",
-    "discordChannel": "Your discord channel ID"
-}

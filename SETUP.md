@@ -11,9 +11,7 @@
 ```npm start```
 
 ## BUT wait, there's MORE
-Before starting the app, do the following:
-- Rename example.json to config.json
-- Create a discordSecret.json file and place your Discord bot's secret key here as 
+Before starting the app, create a discordSecret.json file and place your Discord bot's secret key here as 
 
 ```json
 {
@@ -22,4 +20,4 @@ Before starting the app, do the following:
 ```
 
 ## Building your own executables
-```npm make```
+```npm run make```

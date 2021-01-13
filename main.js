@@ -2,13 +2,30 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const spawn = require('child_process').spawn;
 const ngrok = require('ngrok');
 const Discord = require('discord.js');
-const config = require('./config.json');
 const discordKey = require('./discordSecret.json');
 const path = require('path');
 const fs = require('fs');
 
 var client = undefined;
 var minecraftServerProcess = undefined;
+
+const userDataPath = app.getPath('userData');
+const configFilePath = path.join(userDataPath, 'config.json');
+var config;
+if (!fs.existsSync(configFilePath)) {
+  config = {
+    jar: "",
+    cwd: "",
+    flags: "",
+    ngrokToken: "",
+    port: "",
+    discordChannel: ""
+  };
+  fs.writeFileSync(configFilePath, JSON.stringify(config));
+} else {
+  const jsonString = fs.readFileSync(configFilePath);
+  config = JSON.parse(jsonString);
+}
 
 function createWindow () {
   // Create the browser window.
@@ -41,7 +58,7 @@ function createWindow () {
   });
 
   ipcMain.on("start-server", (event, config) => {
-    fs.writeFileSync("config.json", JSON.stringify(config));
+    fs.writeFileSync(configFilePath, JSON.stringify(config));
     win.loadFile('./public/console.html');
     start(win, config);
   });
