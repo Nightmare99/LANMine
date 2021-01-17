@@ -1,3 +1,4 @@
+if (require('electron-squirrel-startup')) return;
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const spawn = require('child_process').spawn;
 const ngrok = require('ngrok');
@@ -38,6 +39,11 @@ function createWindow () {
   })
 
   win.removeMenu();
+
+  win.on('close', (e) => {
+    if (minecraftServerProcess) minecraftServerProcess.kill();
+  });
+
   if (config.jar.length == 0) win.loadFile('./public/config.html');
   else {
     win.loadFile('./public/console.html');
